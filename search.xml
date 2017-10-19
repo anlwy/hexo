@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[Hexo start《一》]]></title>
+      <url>/hexo/2017/10/19/hexo%20%E7%9A%84%E6%90%AD%E5%BB%BA/</url>
+      <content type="html"><![CDATA[<p><strong>看了很多网页现在开始用HEXO,简洁明了，开始搭建HEXO</strong></p>
+<h1 id="开始爬坑之路"><a href="#开始爬坑之路" class="headerlink" title="开始爬坑之路!"></a>开始爬坑之路!</h1><h1 id="尚未解决的问题："><a href="#尚未解决的问题：" class="headerlink" title="尚未解决的问题："></a>尚未解决的问题：</h1><blockquote>
+<ul>
+<li><h3 id="部署到阿里云服务器"><a href="#部署到阿里云服务器" class="headerlink" title="部署到阿里云服务器"></a>部署到阿里云服务器</h3></li>
+<li><h3 id="设置域名"><a href="#设置域名" class="headerlink" title="设置域名"></a>设置域名</h3></li>
+</ul>
+</blockquote>
+<h2 id="走过的坑："><a href="#走过的坑：" class="headerlink" title="走过的坑："></a><strong>走过的坑：</strong></h2><blockquote>
+<ul>
+<li><h3 id="更新主题没有反应"><a href="#更新主题没有反应" class="headerlink" title="更新主题没有反应"></a>更新主题没有反应</h3></li>
+</ul>
+</blockquote>
+  <div class="note class_name"><p>解决办法：<br>  先hexo clean 在hexo g -d试试<br>  清空public 效果就是hexo clean 相当于把public静态文件清空在重新生成部署。<br>  hexo generate hexo deploy 简写 hexo g -d </p></div>
+<blockquote>
+<ul>
+<li><h3 id="设置SHH密钥时出现错误显示：connect-to-host-github-com-port-22-Connection-timed-out。"><a href="#设置SHH密钥时出现错误显示：connect-to-host-github-com-port-22-Connection-timed-out。" class="headerlink" title="设置SHH密钥时出现错误显示：connect to host github.com port 22: Connection timed out。"></a>设置SHH密钥时出现错误显示：connect to host github.com port 22: Connection timed out。</h3></li>
+</ul>
+</blockquote>
+<p>​    <div class="note danger"><p>解决办法：<br>  在.ssh目录下创建一个config文件，<br>  输入如下内容： Host github.com User xxx@qq.com （你注册github时的邮箱，这里使用注册的用户名也行） Hostname ssh.github.com PreferredAuthentications publickey IdentityFile ~/.ssh/id_rsa Port 443 值得注意是文件名为config，没有后缀名。 然后测试是否连得上 :<br>  即：ssh -T git@github.com 会<br>  出现以下情况：<br>  出现Hi xxx!……表示连接成功。  </p></div></p>
+<blockquote>
+<ul>
+<li><h3 id="github-网页显示不带CSS样式"><a href="#github-网页显示不带CSS样式" class="headerlink" title="github 网页显示不带CSS样式"></a>github 网页显示不带CSS样式</h3></li>
+</ul>
+</blockquote>
+<p>​       <div class="note danger"><p>安装hexo-deployer-git自动部署发布工具 ,<br>   <code>npm instal lhexo-deployer-git --save</code> ，这个工具提供一些简单的指令帮助你发布博文到博客，比如每次修改了或者新增了博客，只用<code>hexo generate</code> 生成静态文件，然后hexo deploy就可以发布到github page。</p>
+<p>   安装成功以后，依次运行hexo clean hexo generate hexo deploy`   </p></div></p>
+<blockquote>
+<ul>
+<li><h3 id="标签没办法连接到文章"><a href="#标签没办法连接到文章" class="headerlink" title="标签没办法连接到文章"></a>标签没办法连接到文章</h3></li>
+</ul>
+</blockquote>
+  <div class="note danger"><p> 解决办法：<br>hexo new page “tags”<br>创建一个Tag 页面存放标签 </p></div>
+<blockquote>
+<ul>
+<li><h3 id="图片无法显示"><a href="#图片无法显示" class="headerlink" title="图片无法显示"></a>图片无法显示</h3></li>
+</ul>
+</blockquote>
+  <div class="note danger"><p>通过七牛云上传图片，获取外链地址</p></div>
+<blockquote>
+<ul>
+<li><h2 id="在解决问题的同时借鉴许多网址，感谢如下网址提供的帮助："><a href="#在解决问题的同时借鉴许多网址，感谢如下网址提供的帮助：" class="headerlink" title="在解决问题的同时借鉴许多网址，感谢如下网址提供的帮助："></a>在解决问题的同时借鉴许多网址，感谢如下网址提供的帮助：</h2></li>
+</ul>
+</blockquote>
+<h5 id="Next官网"><a href="#Next官网" class="headerlink" title="Next官网:"></a><a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="external">Next官网:</a></h5><h5 id="hexo的Next主题个性化配置教程："><a href="#hexo的Next主题个性化配置教程：" class="headerlink" title="hexo的Next主题个性化配置教程："></a><a href="https://segmentfault.com/a/1190000009544924" target="_blank" rel="external">hexo的Next主题个性化配置教程：</a></h5><h5 id="Hexo添加字数统计、阅读时长："><a href="#Hexo添加字数统计、阅读时长：" class="headerlink" title="Hexo添加字数统计、阅读时长："></a><a href="http://www.jianshu.com/p/baea8c95e39b" target="_blank" rel="external">Hexo添加字数统计、阅读时长：</a></h5><blockquote>
+<ul>
+<li>NexT主题有一个配置选项toc_list_number: true，这个选项使我们的目录会自动配上顺序标号，所以我们在自己写的时候可以不用带上了，如果不习惯的话，把这个配置注释掉即可。</li>
+</ul>
+</blockquote>
+<h5 id="配置个性域名"><a href="#配置个性域名" class="headerlink" title=" 配置个性域名"></a><a href="http://www.jianshu.com/p/23b9e095c7c9" target="_blank" rel="external"> 配置个性域名</a></h5><h5 id="关于主题的配置"><a href="#关于主题的配置" class="headerlink" title="关于主题的配置"></a><a href="https://segmentfault.com/q/1010000006891147" target="_blank" rel="external">关于主题的配置</a></h5><h5 id="七牛云存储图片"><a href="#七牛云存储图片" class="headerlink" title="七牛云存储图片"></a><a href="1">七牛云存储图片</a></h5><h5 id="md的高级设置"><a href="#md的高级设置" class="headerlink" title="md的高级设置"></a><a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">md的高级设置</a></h5><h5 id="使用指导"><a href="#使用指导" class="headerlink" title="使用指导:"></a><a href="http://www.jianshu.com/p/3a8dba06856a" target="_blank" rel="external">使用指导:</a></h5><h5 id="更新历史"><a href="#更新历史" class="headerlink" title="更新历史"></a><a href="http://moxfive.xyz/2016/01/10/hexo-post-version-control/" target="_blank" rel="external">更新历史</a></h5><h5 id="Markdown基本语法"><a href="#Markdown基本语法" class="headerlink" title="Markdown基本语法"></a><a href="https://github.com/emn178/markdown" target="_blank" rel="external">Markdown基本语法</a></h5><p>ps:现在很简陋，以后会好的！</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Hexo </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Hello World]]></title>
+      <url>/hexo/2017/10/17/hello-world/</url>
+      <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>
