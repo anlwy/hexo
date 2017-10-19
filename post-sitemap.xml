@@ -7,8 +7,16 @@
     </url>
 
     <url>
+        <loc>http://vlis.ren/2017/10/19/andoid/</loc>
+        <lastmod>2017-10-19T13:00:04.712Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://vlis.ren/2017/10/19/hexo%20%E7%9A%84%E6%90%AD%E5%BB%BA/</loc>
-        <lastmod>2017-10-19T10:45:31.854Z</lastmod>
+        <lastmod>2017-10-19T12:34:19.445Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

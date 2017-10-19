@@ -3,9 +3,112 @@
   
     
     <entry>
+      <title><![CDATA[探究Accessibility服务]]></title>
+      <url>/hexo/2017/10/19/andoid/</url>
+      <content type="html"><![CDATA[<div class="note danger"><h1 id="探究Accessibility服务"><a href="#探究Accessibility服务" class="headerlink" title="探究Accessibility服务"></a>探究Accessibility服务</h1></div>
+俗话说万事开头难，已经实现HEXO的基本功能了，写一点andorid方面的东西，现在开始吧！
+<a id="more"></a>
+
+  <div class="note danger"><h2 id="什么是Accessibility服务"><a href="#什么是Accessibility服务" class="headerlink" title="什么是Accessibility服务"></a>什么是Accessibility服务</h2></div>
+<blockquote>
+<p> 简称无障碍服务，即你看见的东西都可以通过他来实现你想要的功能，可以说功能强大！</p>
+</blockquote>
+ <div class="note danger"><h3 id="AccessibilityService官方简介："><a href="#AccessibilityService官方简介：" class="headerlink" title="AccessibilityService官方简介："></a>AccessibilityService官方简介：</h3></div>
+
+>  The classes in this package are used for development of accessibility service that provide
+>  alternative or augmented feedback to the user.
+>  使用这个类可以开发用于给用户提供替换或者是增强反馈的辅助功能服务。
+
+undefined
+
+ <div class="note danger"><h2 id="怎么配置Accessibility服务"><a href="#怎么配置Accessibility服务" class="headerlink" title="怎么配置Accessibility服务"></a>怎么配置Accessibility服务</h2></div>
+<h3 id="主要方法："><a href="#主要方法：" class="headerlink" title="主要方法："></a><strong>主要方法：</strong></h3><table>
+<thead>
+<tr>
+<th><strong>方法</strong></th>
+<th><strong>作用</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>disableSelf()</td>
+<td>禁用当前服务,也就是在服务可以通过该方法停止运行</td>
+</tr>
+<tr>
+<td>findFoucs(int falg)</td>
+<td>查找拥有特定焦点类型的控件</td>
+</tr>
+<tr>
+<td>getRootInActiveWindow()</td>
+<td>如果配置能够获取窗口内容,则会返回当前活动窗口的根结点</td>
+</tr>
+<tr>
+<td>getSeviceInfo()</td>
+<td>获取当前服务的配置信息</td>
+</tr>
+<tr>
+<td><code>onAccessibilityEvent(AccessibilityEvent event</code>)</td>
+<td>有关AccessibilityEvent事件的回调函数.系统通过sendAccessibiliyEvent()不断的发送AccessibilityEvent到此处</td>
+</tr>
+</tbody>
+</table>
+ <div class="note danger"><h3 id="创建服务类"><a href="#创建服务类" class="headerlink" title="创建服务类"></a>创建服务类</h3></div>
+
+>  新建一个Java文件继承AccessibilityService
+undefined
+
+> 继承AccessibilityService，实现两个方法！
+>  <div class="note danger"><h3 id="声明服务"><a href="#声明服务" class="headerlink" title="声明服务"></a>声明服务</h3></div>
+<p>  在manifest里面声明相关服务<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;service</div><div class="line">android:name=<span class="string">".kk"</span><span class="comment">//这个是你创建好的Java文件</span></div><div class="line"> android:label=<span class="string">"辅助功能"</span><span class="comment">//这个是服务页面显示的文字</span></div><div class="line">android:permission=<span class="string">"android.permission.BIND_ACCESSIBILITY_SERVICE"</span>&gt;</div><div class="line">&lt;intent-filter&gt;</div><div class="line">&lt;action android:name=<span class="string">"android.accessibilityservice.AccessibilityService"</span>/&gt;</div><div class="line">&lt;/intent-filter&gt;</div><div class="line">&lt;meta-data</div><div class="line">android:name=<span class="string">"android.accessibilityservice"</span></div><div class="line">android:resource=<span class="string">"@xml/accessibility"</span>/&gt;<span class="comment">//这是配置文件</span></div><div class="line">&gt; 找不到文件会报错按下神键ALT+ENTER起名字就行</div><div class="line">&lt;/service&gt;</div></pre></td></tr></table></figure></p>
+ <div class="note danger"><h3 id="服务参数设置"><a href="#服务参数设置" class="headerlink" title="服务参数设置"></a>服务参数设置</h3></div>
+
+接下来我们来看accessibility.xml的相关配置:
+
+
+undefined
+
+事件类型（EventType）：
+
+undefined
+
+只需要仿照该配置文件根据自己的需求进行修改即可
+
+ <div class="note danger"><h3 id="运行效果"><a href="#运行效果" class="headerlink" title="运行效果"></a>运行效果</h3></div>
+<blockquote>
+<p>做了个简单的跳转方便找到服务</p>
+</blockquote>
+<p><img src="http://oy1yeugfj.bkt.clouddn.com/Screenshot_2017-10-19-19-21-56-280_com.example.ad.png" alt=""></p>
+<blockquote>
+<p>没有设置其他的属性默认就是这样</p>
+</blockquote>
+<p><img src="http://oy1yeugfj.bkt.clouddn.com/Screenshot_2017-10-19-19-21-48-554_com.android.se.png" alt=""></p>
+<blockquote>
+<p>已经将了如何创建基础的探究Accessibility服务，接下来更新会写到实际的应用<br>比如朋友圈自动点赞，敬请期待。</p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> Android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> android </tag>
+            
+            <tag> Accessibility </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Hexo start《一》]]></title>
       <url>/hexo/2017/10/19/hexo%20%E7%9A%84%E6%90%AD%E5%BB%BA/</url>
-      <content type="html"><![CDATA[<p><strong>看了很多网页现在开始用HEXO,简洁明了，开始搭建HEXO</strong></p>
+      <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">看了很多网页现在开始用HEXO,简洁明了，开始搭建HEXO</div></pre></td></tr></table></figure>
+ <a id="more"></a>
 <h1 id="开始爬坑之路"><a href="#开始爬坑之路" class="headerlink" title="开始爬坑之路!"></a>开始爬坑之路!</h1><h1 id="尚未解决的问题："><a href="#尚未解决的问题：" class="headerlink" title="尚未解决的问题："></a>尚未解决的问题：</h1><blockquote>
 <ul>
 <li><h3 id="部署到阿里云服务器"><a href="#部署到阿里云服务器" class="headerlink" title="部署到阿里云服务器"></a>部署到阿里云服务器</h3></li>
@@ -53,7 +156,8 @@
 <li>NexT主题有一个配置选项toc_list_number: true，这个选项使我们的目录会自动配上顺序标号，所以我们在自己写的时候可以不用带上了，如果不习惯的话，把这个配置注释掉即可。</li>
 </ul>
 </blockquote>
-<h5 id="配置个性域名"><a href="#配置个性域名" class="headerlink" title=" 配置个性域名"></a><a href="http://www.jianshu.com/p/23b9e095c7c9" target="_blank" rel="external"> 配置个性域名</a></h5><h5 id="关于主题的配置"><a href="#关于主题的配置" class="headerlink" title="关于主题的配置"></a><a href="https://segmentfault.com/q/1010000006891147" target="_blank" rel="external">关于主题的配置</a></h5><h5 id="七牛云存储图片"><a href="#七牛云存储图片" class="headerlink" title="七牛云存储图片"></a><a href="1">七牛云存储图片</a></h5><h5 id="md的高级设置"><a href="#md的高级设置" class="headerlink" title="md的高级设置"></a><a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">md的高级设置</a></h5><h5 id="使用指导"><a href="#使用指导" class="headerlink" title="使用指导:"></a><a href="http://www.jianshu.com/p/3a8dba06856a" target="_blank" rel="external">使用指导:</a></h5><h5 id="更新历史"><a href="#更新历史" class="headerlink" title="更新历史"></a><a href="http://moxfive.xyz/2016/01/10/hexo-post-version-control/" target="_blank" rel="external">更新历史</a></h5><h5 id="Markdown基本语法"><a href="#Markdown基本语法" class="headerlink" title="Markdown基本语法"></a><a href="https://github.com/emn178/markdown" target="_blank" rel="external">Markdown基本语法</a></h5><p>ps:现在很简陋，以后会好的！</p>
+<h5 id="配置个性域名"><a href="#配置个性域名" class="headerlink" title=" 配置个性域名"></a><a href="http://www.jianshu.com/p/23b9e095c7c9" target="_blank" rel="external"> 配置个性域名</a></h5><h5 id="关于主题的配置"><a href="#关于主题的配置" class="headerlink" title="关于主题的配置"></a><a href="https://segmentfault.com/q/1010000006891147" target="_blank" rel="external">关于主题的配置</a></h5><h5 id="七牛云存储图片"><a href="#七牛云存储图片" class="headerlink" title="七牛云存储图片"></a><a href="1">七牛云存储图片</a></h5><h5 id="md的高级设置"><a href="#md的高级设置" class="headerlink" title="md的高级设置"></a><a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">md的高级设置</a></h5><h5 id="使用指导"><a href="#使用指导" class="headerlink" title="使用指导:"></a><a href="http://www.jianshu.com/p/3a8dba06856a" target="_blank" rel="external">使用指导:</a></h5><h5 id="更新历史"><a href="#更新历史" class="headerlink" title="更新历史"></a><a href="http://moxfive.xyz/2016/01/10/hexo-post-version-control/" target="_blank" rel="external">更新历史</a></h5><h5 id="Markdown基本语法"><a href="#Markdown基本语法" class="headerlink" title="Markdown基本语法"></a><a href="https://github.com/emn178/markdown" target="_blank" rel="external">Markdown基本语法</a></h5><p><a href="https://coding.net/help/doc/project/markdown.html" target="_blank" rel="external">https://coding.net/help/doc/project/markdown.html</a></p>
+<p><strong>ps:现在很简陋，以后会好的！</strong></p>
 ]]></content>
       
         <categories>
