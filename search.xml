@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[探究Accessibility服务]]></title>
+      <url>/hexo/2017/10/19/andoid/</url>
+      <content type="html"><![CDATA[<div class="note danger"><h1 id="探究Accessibility服务"><a href="#探究Accessibility服务" class="headerlink" title="探究Accessibility服务"></a>探究Accessibility服务</h1></div>
+
+俗话说万事开头难，已经实现HEXO的基本功能了，写一点andorid方面的东西，现在开始吧！
+
+<a id="more"></a>
+
+  <div class="note danger"><h2 id="什么是Accessibility服务"><a href="#什么是Accessibility服务" class="headerlink" title="什么是Accessibility服务"></a>什么是Accessibility服务</h2></div>
+<blockquote>
+<p> 简称无障碍服务，即你看见的东西都可以通过他来实现你想要的功能，可以说功能强大！</p>
+</blockquote>
+ <div class="note danger"><h3 id="AccessibilityService官方简介："><a href="#AccessibilityService官方简介：" class="headerlink" title="AccessibilityService官方简介："></a>AccessibilityService官方简介：</h3></div>
+
+ The classes in this package are used 
+ for development of accessibility service 
+ that providealternative or augmented feedback to the user.
+ 使用这个类可以开发用于给用户提供替换或者是增强反馈的辅助功能服务。
+<p>AccessibilityService运行在后台,界面中产生的任何变化都会产生一个时间,
+并由系统通知给AccessibilityService.
+这就像监视器监视着界面的一举一动,一旦界面发生变化,立刻发出警报.</p>
+
+
+ <div class="note danger"><h2 id="怎么配置Accessibility服务"><a href="#怎么配置Accessibility服务" class="headerlink" title="怎么配置Accessibility服务"></a>怎么配置Accessibility服务</h2></div>
+<blockquote>
+<h3 id="主要方法："><a href="#主要方法：" class="headerlink" title="主要方法："></a><strong>主要方法：</strong></h3></blockquote>
+<table>
+<thead>
+<tr>
+<th><strong>方法</strong></th>
+<th><strong>作用</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>disableSelf()</td>
+<td>禁用当前服务,也就是在服务可以通过该方法停止运行</td>
+</tr>
+<tr>
+<td>findFoucs(int falg)</td>
+<td>查找拥有特定焦点类型的控件</td>
+</tr>
+<tr>
+<td>getRootInActiveWindow()</td>
+<td>如果配置能够获取窗口内容,则会返回当前活动窗口的根结点</td>
+</tr>
+<tr>
+<td>getSeviceInfo()</td>
+<td>获取当前服务的配置信息</td>
+</tr>
+<tr>
+<td><code>onAccessibilityEvent(AccessibilityEvent event</code>)</td>
+<td>有关AccessibilityEvent事件的回调函数.系统通过sendAccessibiliyEvent()不断的发送AccessibilityEvent到此处</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<h3 id="创建服务类"><a href="#创建服务类" class="headerlink" title="创建服务类"></a>创建服务类</h3><p> 新建一个Java文件继承AccessibilityService<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">kk</span> <span class="keyword">extends</span> <span class="title">AccessibilityService</span> </span>&#123;    </div><div class="line"><span class="meta">@Override</span>    </div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAccessibilityEvent</span><span class="params">(AccessibilityEvent accessibilityEvent)</span></span>&#123;  	&#125;    </div><div class="line"><span class="meta">@Override</span>  </div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onInterrupt</span><span class="params">()</span> </span>&#123;   </div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>继承AccessibilityService，实现两个方法！</p>
+<blockquote>
+<h3 id="声明服务"><a href="#声明服务" class="headerlink" title="声明服务"></a>声明服务</h3><p> 在manifest里面声明相关服务</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;service</div><div class="line">android:name=<span class="string">".kk"</span><span class="comment">//这个是你创建好的Java文件</span></div><div class="line"> android:label=<span class="string">"辅助功能"</span><span class="comment">//这个是服务页面显示的文字</span></div><div class="line">android:permission=<span class="string">"android.permission.BIND_ACCESSIBILITY_SERVICE"</span>&gt;</div><div class="line">&lt;intent-filter&gt;</div><div class="line">&lt;action android:name=<span class="string">"android.accessibilityservice.AccessibilityService"</span>/&gt;</div><div class="line">&lt;/intent-filter&gt;</div><div class="line">&lt;meta-data</div><div class="line">android:name=<span class="string">"android.accessibilityservice"</span></div><div class="line">android:resource=<span class="string">"@xml/accessibility"</span>/&gt;<span class="comment">//这是配置文件</span></div><div class="line">&gt; 找不到文件会报错按下神键ALT+ENTER起名字就行</div><div class="line">&lt;/service&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<h3 id="服务参数设置"><a href="#服务参数设置" class="headerlink" title="服务参数设置"></a>服务参数设置</h3><p>接下来我们来看accessibility.xml的相关配置:</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</div><div class="line">&lt;accessibility-service xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">android:accessibilityEventTypes=<span class="string">"typeNotificationStateChanged|typeWindowStateChanged|typeWindowContentChanged"</span><span class="comment">// 事件类型</span></div><div class="line">    android:accessibilityFeedbackType=<span class="string">"feedbackGeneric"</span><span class="comment">//反馈类型，声音、震动等</span></div><div class="line">    android:accessibilityFlags=<span class="string">"flagDefault"</span></div><div class="line">    android:canRetrieveWindowContent=<span class="string">"true"</span><span class="comment">//允许获取手机页面中的信息</span></div><div class="line">    android:notificationTimeout=<span class="string">"100"</span></div><div class="line">    android:packageNames=<span class="string">"com.tencent.mm"</span><span class="comment">// 要监听的包名，过滤作用，以微信的包名为例 /&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>事件类型（EventType）：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#TYPES_ALL_MASK：所有类型</div><div class="line">#TYPE_VIEW_CLICKED ：单击</div><div class="line">#TYPE_VIEW_LONG_CLICKED ：长按</div><div class="line">#TYPE_VIEW_SELECTED ：选中</div><div class="line">#TYPE_VIEW_FOCUSED ：获取焦点</div><div class="line">#TYPE_VIEW_TEXT_CHANGED ：文字改变</div><div class="line">#TYPE_WINDOW_STATE_CHANGED ：窗口状态改变</div><div class="line">#TYPE_NOTIFICATION_STATE_CHANGED ：通知状态改变</div></pre></td></tr></table></figure>
+<p>只需要仿照该配置文件根据自己的需求进行修改即可</p>
+ <div class="note danger"><h3 id="运行效果"><a href="#运行效果" class="headerlink" title="运行效果"></a>运行效果</h3></div>
+<blockquote>
+<p>做了个简单的跳转方便找到服务</p>
+</blockquote>
+<p><img src="http://oy1yeugfj.bkt.clouddn.com/Screenshot_2017-10-19-19-21-56-280_com.example.ad.png" alt=""></p>
+<blockquote>
+<p>没有设置其他的属性默认就是这样</p>
+</blockquote>
+<p><img src="http://oy1yeugfj.bkt.clouddn.com/Screenshot_2017-10-19-19-21-48-554_com.android.se.png" alt=""></p>
+<blockquote>
+<p>已经将了如何创建基础的探究Accessibility服务，接下来更新会写到实际的应用<br>比如朋友圈自动点赞，敬请期待。</p>
+<p>图片也不可以加！！</p>
+<p>Ps:被MD的格式问题困扰许久，终于发现了 在贴代码块的时候前面的代码不要加note标签，否则显示不出来 </p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> Android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> android </tag>
+            
+            <tag> Accessibility </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Hexo start《一》]]></title>
+      <url>/hexo/2017/10/19/hexo%20%E7%9A%84%E6%90%AD%E5%BB%BA/</url>
+      <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">看了很多网页现在开始用HEXO,简洁明了，开始搭建HEXO</div></pre></td></tr></table></figure>
+ <a id="more"></a>
+<h1 id="开始爬坑之路"><a href="#开始爬坑之路" class="headerlink" title="开始爬坑之路!"></a>开始爬坑之路!</h1><h1 id="尚未解决的问题："><a href="#尚未解决的问题：" class="headerlink" title="尚未解决的问题："></a>尚未解决的问题：</h1><blockquote>
+<ul>
+<li><h3 id="部署到阿里云服务器"><a href="#部署到阿里云服务器" class="headerlink" title="部署到阿里云服务器"></a>部署到阿里云服务器</h3></li>
+<li><h3 id="设置域名"><a href="#设置域名" class="headerlink" title="设置域名"></a>设置域名</h3></li>
+</ul>
+</blockquote>
+<h2 id="走过的坑："><a href="#走过的坑：" class="headerlink" title="走过的坑："></a><strong>走过的坑：</strong></h2><blockquote>
+<ul>
+<li><h3 id="更新主题没有反应"><a href="#更新主题没有反应" class="headerlink" title="更新主题没有反应"></a>更新主题没有反应</h3></li>
+</ul>
+</blockquote>
+  <div class="note class_name"><p>解决办法：<br>  先hexo clean 在hexo g -d试试<br>  清空public 效果就是hexo clean 相当于把public静态文件清空在重新生成部署。<br>  hexo generate hexo deploy 简写 hexo g -d </p></div>
+<blockquote>
+<ul>
+<li><h3 id="设置SHH密钥时出现错误显示：connect-to-host-github-com-port-22-Connection-timed-out。"><a href="#设置SHH密钥时出现错误显示：connect-to-host-github-com-port-22-Connection-timed-out。" class="headerlink" title="设置SHH密钥时出现错误显示：connect to host github.com port 22: Connection timed out。"></a>设置SHH密钥时出现错误显示：connect to host github.com port 22: Connection timed out。</h3></li>
+</ul>
+</blockquote>
+<p>​    <div class="note danger"><p>解决办法：<br>  在.ssh目录下创建一个config文件，<br>  输入如下内容： Host github.com User xxx@qq.com （你注册github时的邮箱，这里使用注册的用户名也行） Hostname ssh.github.com PreferredAuthentications publickey IdentityFile ~/.ssh/id_rsa Port 443 值得注意是文件名为config，没有后缀名。 然后测试是否连得上 :<br>  即：ssh -T git@github.com 会<br>  出现以下情况：<br>  出现Hi xxx!……表示连接成功。  </p></div></p>
+<blockquote>
+<ul>
+<li><h3 id="github-网页显示不带CSS样式"><a href="#github-网页显示不带CSS样式" class="headerlink" title="github 网页显示不带CSS样式"></a>github 网页显示不带CSS样式</h3></li>
+</ul>
+</blockquote>
+<p>​       <div class="note danger"><p>安装hexo-deployer-git自动部署发布工具 ,<br>   <code>npm instal lhexo-deployer-git --save</code> ，这个工具提供一些简单的指令帮助你发布博文到博客，比如每次修改了或者新增了博客，只用<code>hexo generate</code> 生成静态文件，然后hexo deploy就可以发布到github page。</p>
+<p>   安装成功以后，依次运行hexo clean hexo generate hexo deploy`   </p></div></p>
+<blockquote>
+<ul>
+<li><h3 id="标签没办法连接到文章"><a href="#标签没办法连接到文章" class="headerlink" title="标签没办法连接到文章"></a>标签没办法连接到文章</h3></li>
+</ul>
+</blockquote>
+  <div class="note danger"><p> 解决办法：<br>hexo new page “tags”<br>创建一个Tag 页面存放标签 </p></div>
+<blockquote>
+<ul>
+<li><h3 id="图片无法显示"><a href="#图片无法显示" class="headerlink" title="图片无法显示"></a>图片无法显示</h3></li>
+</ul>
+</blockquote>
+  <div class="note danger"><p>通过七牛云上传图片，获取外链地址</p></div>
+<blockquote>
+<ul>
+<li><h2 id="在解决问题的同时借鉴许多网址，感谢如下网址提供的帮助："><a href="#在解决问题的同时借鉴许多网址，感谢如下网址提供的帮助：" class="headerlink" title="在解决问题的同时借鉴许多网址，感谢如下网址提供的帮助："></a>在解决问题的同时借鉴许多网址，感谢如下网址提供的帮助：</h2></li>
+</ul>
+</blockquote>
+<h5 id="Next官网"><a href="#Next官网" class="headerlink" title="Next官网:"></a><a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="external">Next官网:</a></h5><h5 id="hexo的Next主题个性化配置教程："><a href="#hexo的Next主题个性化配置教程：" class="headerlink" title="hexo的Next主题个性化配置教程："></a><a href="https://segmentfault.com/a/1190000009544924" target="_blank" rel="external">hexo的Next主题个性化配置教程：</a></h5><h5 id="Hexo添加字数统计、阅读时长："><a href="#Hexo添加字数统计、阅读时长：" class="headerlink" title="Hexo添加字数统计、阅读时长："></a><a href="http://www.jianshu.com/p/baea8c95e39b" target="_blank" rel="external">Hexo添加字数统计、阅读时长：</a></h5><blockquote>
+<ul>
+<li>NexT主题有一个配置选项toc_list_number: true，这个选项使我们的目录会自动配上顺序标号，所以我们在自己写的时候可以不用带上了，如果不习惯的话，把这个配置注释掉即可。</li>
+</ul>
+</blockquote>
+<h5 id="配置个性域名"><a href="#配置个性域名" class="headerlink" title=" 配置个性域名"></a><a href="http://www.jianshu.com/p/23b9e095c7c9" target="_blank" rel="external"> 配置个性域名</a></h5><h5 id="关于主题的配置"><a href="#关于主题的配置" class="headerlink" title="关于主题的配置"></a><a href="https://segmentfault.com/q/1010000006891147" target="_blank" rel="external">关于主题的配置</a></h5><h5 id="七牛云存储图片"><a href="#七牛云存储图片" class="headerlink" title="七牛云存储图片"></a><a href="1">七牛云存储图片</a></h5><h5 id="md的高级设置"><a href="#md的高级设置" class="headerlink" title="md的高级设置"></a><a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">md的高级设置</a></h5><h5 id="使用指导"><a href="#使用指导" class="headerlink" title="使用指导:"></a><a href="http://www.jianshu.com/p/3a8dba06856a" target="_blank" rel="external">使用指导:</a></h5><h5 id="更新历史"><a href="#更新历史" class="headerlink" title="更新历史"></a><a href="http://moxfive.xyz/2016/01/10/hexo-post-version-control/" target="_blank" rel="external">更新历史</a></h5><h5 id="Markdown基本语法"><a href="#Markdown基本语法" class="headerlink" title="Markdown基本语法"></a><a href="https://github.com/emn178/markdown" target="_blank" rel="external">Markdown基本语法</a></h5><p><a href="https://coding.net/help/doc/project/markdown.html" target="_blank" rel="external">https://coding.net/help/doc/project/markdown.html</a></p>
+<p><strong>ps:现在很简陋，以后会好的！</strong></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Hexo </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>
